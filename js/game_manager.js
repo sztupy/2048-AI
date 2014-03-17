@@ -68,7 +68,7 @@ GameManager.prototype.move = function(direction) {
 
   if (!result.won) {
     if (result.moved) {
-      this.grid.computerMove();
+      this.grid.computerMove(this.ai);
     }
   } else {
     this.won = true;

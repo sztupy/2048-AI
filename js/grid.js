@@ -234,8 +234,19 @@ Grid.prototype.move = function (direction) {
   return {moved: moved, score: score, won: won};
 };
 
-Grid.prototype.computerMove = function() {
-  this.addRandomTile();
+Grid.prototype.computerMove = function(ai) {
+  if (ai===undefined) {
+    this.addRandomTile();
+  } else {
+    result = ai.getEnemy();
+    if (result && result.enemy!=-1) {
+      var tile = new Tile(result.enemy[0], result.enemy[1]);
+      this.insertTile(tile);
+    } else {
+      console.log("Enemy movement missing!");
+      this.addRandomTile();
+    }
+  }
   this.playerTurn = true;
 }
 
