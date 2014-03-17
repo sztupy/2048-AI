@@ -2,7 +2,7 @@
 
 Modification for the game [2048](https://github.com/gabrielecirulli/2048), where instead of a random generator the computer will chose the worst possible place to put the 2s and 4s.
 
-See it in action ). (Hit the auto-run button to let the AI attempt to play against himself and fail miserably)
+See it in action [here](http://sztupy.github.io/2048-Hard/). (Hit the auto-run button to let the AI attempt to play against himself and fail miserably)
 
 The algorithm used is the same as in the [2048-AI](http://ov3y.github.io/2048-AI/), but when determining where to put the 2s and 4s, the computer will also run the algorithm to find the worst place to put it for you.
 
