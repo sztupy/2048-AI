@@ -12,6 +12,14 @@
   float: right;
 }
 
+#difficulty-container {
+  float: left;
+}
+
+#difficulty-selector option {
+  padding: 0.2em;
+}
+
 #hint-button-container, #feedback-container {
   float: left;
 }

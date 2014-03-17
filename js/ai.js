@@ -21,8 +21,6 @@ AI.prototype.eval = function() {
        + this.grid.maxValue() * maxWeight;
 };
 
-//AI.prototype.cache = {}
-
 // alpha-beta depth first search
 AI.prototype.search = function(depth, alpha, beta, positions, cutoffs, isEnemy) {
   var bestScore;
@@ -67,10 +65,10 @@ AI.prototype.search = function(depth, alpha, beta, positions, cutoffs, isEnemy) 
     }
   }
 
-  else { // computer's turn, we'll do heavy pruning to keep the branching factor low
+  else { 
     bestScore = beta;
 
-    if (isEnemy) {
+    if (isEnemy) { // if playing as the computer properly check all possible moves for best option.
       for (var x=0; x<4; x++) {
         for (var y=0; y<4; y++) {
           var position = {x:x, y:y};
@@ -93,7 +91,6 @@ AI.prototype.search = function(depth, alpha, beta, positions, cutoffs, isEnemy) 
                 bestEnemy = [position, parseInt(value,10)];
               }
               if (bestScore < alpha) {
-                //console.log('cutoff')
                 cutoffs++;
                 return { move: bestMove, enemy: bestEnemy, score: bestScore, positions: positions, cutoffs: cutoffs };
               }
@@ -101,7 +98,7 @@ AI.prototype.search = function(depth, alpha, beta, positions, cutoffs, isEnemy) 
           }
         }
       }
-    } else {
+    } else { // Player's move, we'll do heavy pruning to keep the branching factor low
       // try a 2 and 4 in each cell and measure how annoying it is
       // with metrics from eval
       var candidates = [];
@@ -175,16 +172,12 @@ AI.prototype.iterativeDeep = function() {
   do {
     var newBest = this.search(depth, -10000, 10000, 0 ,0, false);
     if (newBest.move == -1) {
-      //console.log('BREAKING EARLY');
       break;
     } else {
       best = newBest;
     }
     depth++;
   } while ( (new Date()).getTime() - start < minSearchTime);
-  //console.log('depth', --depth);
-  //console.log(this.translate(best.move));
-  //console.log(best);
   return best
 }
 

@@ -183,9 +183,6 @@ Grid.prototype.move = function (direction) {
       tile = self.cellContent(cell);
 
       if (tile) {
-        //if (debug) {
-          //console.log('tile @', x, y);
-        //}
         var positions = self.findFarthestPosition(cell, vector);
         var next      = self.cellContent(positions.next);
 
@@ -208,29 +205,17 @@ Grid.prototype.move = function (direction) {
             won = true;
           }
         } else {
-          //if (debug) {
-            //console.log(cell);
-            //console.log(tile);
-          //}
           self.moveTile(tile, positions.farthest);
         }
 
         if (!self.positionsEqual(cell, tile)) {
           self.playerTurn = false;
-          //console.log('setting player turn to ', self.playerTurn);
           moved = true; // The tile moved from its original cell!
         }
       }
     });
   });
 
-  //console.log('returning, playerturn is', self.playerTurn);
-  //if (!moved) {
-    //console.log('cell', cell);
-    //console.log('tile', tile);
-    //console.log('direction', direction);
-    //console.log(this.toString());
-  //}
   return {moved: moved, score: score, won: won};
 };
 
@@ -238,13 +223,19 @@ Grid.prototype.computerMove = function(ai) {
   if (ai===undefined) {
     this.addRandomTile();
   } else {
-    result = ai.getEnemy();
-    if (result && result.enemy!=-1) {
-      var tile = new Tile(result.enemy[0], result.enemy[1]);
-      this.insertTile(tile);
+    var difficultySelector = document.getElementById("difficulty-selector");
+    var difficulty = parseFloat(difficultySelector.options[difficultySelector.selectedIndex].value);
+    if (Math.random() < difficulty) {
+      result = ai.getEnemy();
+      if (result && result.enemy!=-1) {
+        var tile = new Tile(result.enemy[0], result.enemy[1]);
+        this.insertTile(tile);
+      } else {
+        console.log("Enemy movement missing!");
+        this.addRandomTile();
+      }
     } else {
-      console.log("Enemy movement missing!");
-      this.addRandomTile();
+      this.addRandomTile();      
     }
   }
   this.playerTurn = true;

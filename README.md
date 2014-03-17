@@ -1,14 +1,20 @@
+# 2048 Hard
+
+Modification for the game [2048](https://github.com/gabrielecirulli/2048), where instead of a random generator the computer will chose the worst possible place to put the 2s and 4s.
+
+See it in action ). (Hit the auto-run button to let the AI attempt to play against himself and fail miserably)
+
+The algorithm used is the same as in the [2048-AI](http://ov3y.github.io/2048-AI/), but when determining where to put the 2s and 4s, the computer will also run the algorithm to find the worst place to put it for you.
+
+The difficulty settings just determines the frequency of an AI step, instead of a random step. Easy is 0% (essentially the same as the original game), Medium is 25%, Hard is 50%, and Impossible is 100%.
+
+The following is the readme from the 2048-AI. Don't believe it, it cannot usually earn more then the 128 tile in impossible mode.
+
 # 2048 AI
-
-AI for the game [2048](https://github.com/gabrielecirulli/2048).
-
-See it in action [here](http://ov3y.github.io/2048-AI/). (Hit the auto-run button to let the AI attempt to solve it by itself)
 
 The algorithm is iterative deepening depth first alpha-beta search. The evaluation function tries to keep the rows and columns monotonic (either all decreasing or increasing) while aligning same-valued tiles and minimizing the number of tiles on the grid. For more detail on how it works, [check out my answer on stackoverflow](http://stackoverflow.com/a/22389702/1056032).
 
 You can tweak the thinking time via global var `animationDelay`. Higher = more time/deeper search.
-
-~~I think there are still some bugs as it tends to make some weird moves and die during the endgame, but in my testing it almost always gets 1024 and usually gets very close to 2048, achieving scores of roughly 8-10k.~~
 
 The better heuristics now give it a success rate of about 90% in my testing (on a reasonably fast computer).
 
@@ -18,6 +24,4 @@ The better heuristics now give it a success rate of about 90% in my testing (on 
 
 2. Put the search in a webworker. Parallelizing minimax is really hard, but just running it like normal in another thread would let the animations run more smoothly.
 
-3. ~~Evaluation tweaks. There are currently four heuristics. Change the weights between them, run a lot of test games and track statistics to find an optimal eval function.~~
-
-4. Comments and cleanup. It's pretty hacky right now but I've spent too much time already. There are probably lots of low-hanging fruit optimizations.
+3. Comments and cleanup. It's pretty hacky right now but I've spent too much time already. There are probably lots of low-hanging fruit optimizations.
