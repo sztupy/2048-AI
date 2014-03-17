@@ -39,10 +39,17 @@
       <div id='difficulty-container' class='ai-button'>
         <label>Difficulty:</label>
         <select id='difficulty-selector'>
-          <option value="0">Easy (same as original game)</option>
+          <option value="0">Easy</option>
           <option value="0.25">Medium</option>
           <option value="0.5">Hard</option>
           <option value="1" selected>Impossible</option>
+        </select>
+        <label>Using:</label>
+        <select id='generation-selector'>
+          <option value="1">2s only</option>
+          <option value="2" selected>2s and 4s</option>
+          <option value="3">2s, 4s, 8s</option>
+          <option value="4">2s, 4s, 8s, 16s</option>
         </select>
       </div>
     </div>
@@ -92,7 +99,16 @@
       <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
     </p>
     <p>
-    Difficulty settings: <strong>Easy</strong>: same as original game, new tiles are generated randomly; <strong>Medium</strong>: computer will place the new tile in an annoying place 25% of the time; <strong>Hard</strong>: computer will place the new tile in an annoying place 50% of the time; <strong>Impossible</strong>: computer will always place the tile in an annoying place.
+    <strong>Difficulty settings</strong>:
+    <ul>
+      <li><strong>Easy</strong>: same as original game, new tiles are generated randomly
+      <li><strong>Medium</strong>: computer will place the new tile in an annoying place 25% of the time
+      <li><strong>Hard</strong>: computer will place the new tile in an annoying place 50% of the time
+      <li><strong>Impossible</strong>: computer will always place the tile in an annoying place.
+    </ul>
+    </p>
+    <p>
+    <strong>Using</strong>: this section will determine which values can be generated on the grid by the computer. The default is to generate both <strong>2s and 4s</strong>. Switch it to <strong>2s only</strong> if you want an easier game, or increase it for fun.
     </p>
     <hr>
     <p>

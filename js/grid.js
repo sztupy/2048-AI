@@ -120,8 +120,13 @@ Grid.prototype.addStartTiles = function () {
 // Adds a tile in a random position
 Grid.prototype.addRandomTile = function () {
   if (this.cellsAvailable()) {
-    var value = Math.random() < 0.9 ? 2 : 4;
-    //var value = Math.random() < 0.9 ? 256 : 512;
+    var generationSelector = document.getElementById("generation-selector");
+    var maxValue = Math.pow(2,parseInt(generationSelector.options[generationSelector.selectedIndex].value));
+    var value = 2;
+    while (value<maxValue && Math.random() < 1-(0.1*maxValue)) {
+      value *= 2;
+    }
+
     var tile = new Tile(this.randomAvailableCell(), value);
 
     this.insertTile(tile);
