@@ -2,6 +2,16 @@ function AI(grid) {
   this.grid = grid;
 }
 
+AI.prototype.getAvailableScores = function() {
+  var generationSelector = document.getElementById("generation-selector");
+  var maxValue = Math.pow(2,parseInt(generationSelector.options[generationSelector.selectedIndex].value));
+  var result = {};
+  for (var value = 2; value <= maxValue; value *=2) {
+    result[value] = [];
+  }
+  return result;
+}
+
 // static evaluation function
 AI.prototype.eval = function() {
   var emptyCells = this.grid.availableCells().length;
@@ -72,7 +82,7 @@ AI.prototype.search = function(depth, alpha, beta, positions, cutoffs, isEnemy) 
       for (var x=0; x<4; x++) {
         for (var y=0; y<4; y++) {
           var position = {x:x, y:y};
-          var scores = { 2: [] , 4: [] };
+          var scores = this.getAvailableScores();
           if (this.grid.cellAvailable(position)) {
             for (var value in scores) {
               var newGrid = this.grid.clone();
@@ -103,7 +113,7 @@ AI.prototype.search = function(depth, alpha, beta, positions, cutoffs, isEnemy) 
       // with metrics from eval
       var candidates = [];
       var cells = this.grid.availableCells();
-      var scores = { 2: [] , 4: [] };
+      var scores = this.getAvailableScores();
       for (var value in scores) {
         for (var i in cells) {
           scores[value].push(null);
